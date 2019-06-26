@@ -69,6 +69,7 @@ def handle_films(message):
 	
 	bot.send_message(message.chat.id, '\n'.join(kino))
 	kino=[]
+	aj=0
 	msg =bot.send_message(message.chat.id, "Выбери номер фильма: ")
 	bot.register_next_step_handler(msg, OMl)
 def OMl(message):
