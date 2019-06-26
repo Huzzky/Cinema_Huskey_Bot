@@ -4,7 +4,6 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
-from ehp import *
 import re
 
 
