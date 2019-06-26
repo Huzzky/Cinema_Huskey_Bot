@@ -56,6 +56,7 @@ def handle_films(message):
 		count+=1
 		href_films.append( x.attrs['href']) # Добавляем в массив ссылки, чтобы можно было
 # Парсить Описание и сеансы
+	print(href_films)
 	print(len(href_films))
 	elms2 = bs.select('span.link_border') #Поиск всех названий фильмов
 	for x in elms2:
