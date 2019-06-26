@@ -72,6 +72,7 @@ def handle_films(message):
 	msg =bot.send_message(message.chat.id, "Выбери номер фильма: ")
 	bot.register_next_step_handler(msg, OMl)
 def OMl(message):
+	dil kino[0]
 	global change_films
 	change_films= message.text
 	if change_films.lower == "выход" or change_films=='-':
@@ -83,7 +84,7 @@ def OMl(message):
 				data = data1.text
 				bs = BeautifulSoup(data, "html.parser")
 				elms3=bs.select('span.movieInfoV2_descText p') #парсинг описания
-				kino.pop()
+				
 				for i in elms3:
 					description.append(i.text)
 				elms4=bs.select('span.movieInfoV2_infoData') # Парсинг времени и выхода фильма
