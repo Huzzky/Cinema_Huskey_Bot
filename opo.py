@@ -90,16 +90,16 @@ def OMl(message):
 				elms4=bs.select('span.movieInfoV2_infoData') # Парсинг времени и выхода фильма
 				for i in elms4:
 					info_films.append(i.text)
-					print(info_films)
+					
 				for o in range(len(info_films)):
 					try:
 						description.append(info_films_dop[o]+info_films[o])
-						print(info_films_dop[o]+info_films[o])
+					
 					except IndexError:
 						pass
 				#print(description)
 				bot.send_message(message.chat.id, '\n\n'.join(description))
-				description = []
+				description, info_films = [], []
 				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то напиши 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.")
 				bot.register_next_step_handler(msg, seans_cinema)
 			except IndexError:
