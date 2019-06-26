@@ -127,6 +127,7 @@ def seans_cinema(message):
 	elif change_second=="Список кинотеатров":
 		print(proverka)
 		bot.send_message(message.chat.id, "Тебе выведет названия кинотетров, где есть сеансы этого фильма.")
+		print(proverka)
 		bot.send_message(message.chat.id, '\n'.join(proverka))
 		proverka=[]
 		bot.send_message(message.chat.id, "Введи еще раз /films и введи уже нужный кинотетр.")
