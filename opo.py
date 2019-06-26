@@ -90,9 +90,11 @@ def OMl(message):
 				elms4=bs.select('span.movieInfoV2_infoData') # Парсинг времени и выхода фильма
 				for i in elms4:
 					info_films.append(i.text)
+					print(info_films)
 				for o in range(len(info_films)):
 					try:
 						description.append(info_films_dop[o]+info_films[o])
+						print(info_films_dop[o]+info_films[o])
 					except IndexError:
 						pass
 				#print(description)
