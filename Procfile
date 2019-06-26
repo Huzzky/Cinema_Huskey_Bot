@@ -1,1 +1,1 @@
-worker: python finallybot.py
+worker: python opo.py
