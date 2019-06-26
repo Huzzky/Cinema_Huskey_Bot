@@ -74,6 +74,7 @@ def handle_films(message):
 def OMl(message):
 	global change_films
 	global description
+	global info_films
 	change_films= message.text
 	if change_films.lower == "выход" or change_films=='-':
 		pass
