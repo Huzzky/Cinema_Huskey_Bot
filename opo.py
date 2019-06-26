@@ -94,12 +94,17 @@ def OMl(message):
 						description.append(info_films_dop[o]+info_films[o])
 					except IndexError:
 						pass
-				print(description)
+				#print(description)
 				bot.send_message(message.chat.id, '\n\n'.join(description))
+				print(description[0])
 				del description[0]
+				print(description[1])
 				del description[1]
+				print(description[2])
 				del description[2]
+				print(description[3])
 				del description[3]
+				print(description[4])
 				del description[4]
 				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то напиши 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.")
 				bot.register_next_step_handler(msg, seans_cinema)
