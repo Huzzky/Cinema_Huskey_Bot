@@ -15,7 +15,6 @@ dop_full,dop_full2,dop_full3,dop_full4,dop_full5,href,info_films,proverka,name_c
 pol,pol1,pol2,pol3,pol4,pol5,count,aj,index=0,0,0,0,0,0,0,0,0
 dict_cinema={}
 TOKEN = '767349424:AAGrdNyYLB1aS-U00QB5Xeto73RlpL1NcX0'
-from ehp import *
 bot = telebot.TeleBot(TOKEN)
 
 
