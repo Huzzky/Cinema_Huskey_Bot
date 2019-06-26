@@ -73,6 +73,7 @@ def handle_films(message):
 	bot.register_next_step_handler(msg, OMl)
 def OMl(message):
 	global change_films
+	global description
 	change_films= message.text
 	if change_films.lower == "выход" or change_films=='-':
 		pass
