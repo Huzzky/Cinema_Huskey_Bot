@@ -46,7 +46,7 @@ def handle_start(message):
 @bot.message_handler(commands=['films'])
 def handle_films(message):
 	global count, aj
-	global href_films, proverka
+	global href_films, proverka,kino
 	href_films=[]
 	data1 = requests.get('https://msk.kinoafisha.info/movies/')
 	data = data1.text
@@ -70,6 +70,7 @@ def handle_films(message):
 				pass
 	
 	bot.send_message(message.chat.id, '\n'.join(kino))
+	kino=[]
 	msg =bot.send_message(message.chat.id, "Выбери номер фильма: ")
 	bot.register_next_step_handler(msg, OMl)
 def OMl(message):
@@ -110,7 +111,7 @@ def OMl(message):
 			bot.send_message(message.chat.id, "Ты ввел не номер фильма. Начни все заново - /films")
 
 def seans_cinema(message):
-	global dict_cinema
+	global dict_cinema,proverka,dop_full4
 	number_of_cinema=href_films[int(change_films)-1][35:]
 	data1=requests.get('https://msk.kinoafisha.info/movies/'+str(number_of_cinema)+'#subMenuScrollTo') #парсинг описания и сеансов фильма
 	data = data1.text
@@ -128,6 +129,7 @@ def seans_cinema(message):
 		print(proverka)
 		bot.send_message(message.chat.id, "Тебе выведет названия кинотетров, где есть сеансы этого фильма.")
 		bot.send_message(message.chat.id, '\n'.join(proverka))
+		proverka=[]
 		bot.send_message(message.chat.id, "Введи еще раз /films и введи уже нужный кинотетр.")
 	else:
 		number_of_cinema=href_films[int(change_films)-1][35:]
@@ -160,6 +162,8 @@ def seans_cinema(message):
 		for i in dict_cinema:
 			if change_second in i:
 				bot.send_message(message.chat.id, 'Сеансы: '+'\n\n'+ dict_cinema[i])
+				dop_full4=[]
+				dict_cinema={}
 
 				
 
