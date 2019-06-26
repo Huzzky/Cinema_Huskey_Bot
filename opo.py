@@ -79,7 +79,8 @@ def OMl(message):
 	else:
 		try:
 			try:
-				data1=requests.get(href_films[int(change_films)-1]) #парсинг описания и сеансов фильма
+				data1=requests.get(href_films[int(change_films)-1])#парсинг описания и сеансов фильма
+				print(href_films[int(change_films)-1])
 				data = data1.text
 				bs = BeautifulSoup(data, "html.parser")
 				elms3=bs.select('span.movieInfoV2_descText p') #парсинг описания
