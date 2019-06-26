@@ -97,6 +97,10 @@ def OMl(message):
 				#print(description)
 				bot.send_message(message.chat.id, '\n\n'.join(description))
 				description.remove(description[0])
+				description.remove(description[1])
+				description.remove(description[2])
+				description.remove(description[3])
+				description.remove(description[4])
 				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то напиши 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.")
 				bot.register_next_step_handler(msg, seans_cinema)
 			except IndexError:
