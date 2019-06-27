@@ -163,6 +163,7 @@ def seans_cinema(message):
 				bot.send_message(message.chat.id, 'Сеансы: '+'\n\n'+ dict_cinema[i])
 				dop_full4=[]
 				dict_cinema={}
+				proverka=[]
 
 				
 
