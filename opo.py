@@ -63,7 +63,7 @@ def handle_films(message):
 		else:
 			aj+=1
 			if aj<=100:	
-				kino.append('"'+x.text+'"'+" - " +str(aj))
+				kino.append('"'+x.text+'"'+" - /" +str(aj))
 			else:
 				pass
 	
@@ -77,12 +77,13 @@ def OMl(message):
 	global description
 	global info_films
 	change_films= message.text
+	change_films_2 = change_films.lstrip('/')
 	if change_films.lower == "выход" or change_films=='-':
 		pass
 	else:
 		try:
 			try:
-				data1=requests.get(href_films[int(change_films)-1])#парсинг описания и сеансов фильма
+				data1=requests.get(href_films[int(change_films_2)-1])#парсинг описания и сеансов фильма
 				data = data1.text
 				bs = BeautifulSoup(data, "html.parser")
 				elms3=bs.select('span.movieInfoV2_descText p') #парсинг описания
