@@ -63,7 +63,7 @@ def handle_films(message):
 		else:
 			aj+=1
 			if aj<=100:	
-				kino.append('"'+x.text+'"'+" - " +str('`'+aj+'`'))
+				kino.append('"'+x.text+'"'+" - "+'`' +str(aj)+'`')
 			else:
 				pass
 	
