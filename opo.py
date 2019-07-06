@@ -73,7 +73,7 @@ def handle_films(message):
 	msg =bot.send_message(message.chat.id, "Выбери номер фильма: ")
 	bot.register_next_step_handler(msg, OMl)
 def OMl(message):
-	global change_films
+	global change_films, change_films_2
 	global description
 	global info_films
 	change_films= message.text
