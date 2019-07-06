@@ -132,7 +132,7 @@ def seans_cinema(message):
 		proverka=[]
 		bot.send_message(message.chat.id, "Введи еще раз /films и введи уже нужный кинотетр.")
 	else:
-		number_of_cinema=href_films[int(change_films)-1][35:]
+		number_of_cinema=href_films[int(change_films_2)-1][35:]
 		data1=requests.get('https://msk.kinoafisha.info/movies/'+str(number_of_cinema)+'#subMenuScrollTo') #парсинг описания и сеансов фильма
 		data = data1.text
 		bs = BeautifulSoup(data, "html.parser")
