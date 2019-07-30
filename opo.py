@@ -228,7 +228,10 @@ def second_step(message):
 		except IndexError:
 			pass
 		b=[]
-		data = data1.text
+		try:
+			data = data1.text
+		except UnboundLocalError:
+			pass
 		bs = BeautifulSoup(data, 'html.parser')
 		elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
 		for i in elms:
