@@ -221,7 +221,10 @@ def second_step(message):
 	else:
 		change_of_cinema_2 = change_of_cinema.lstrip('/')
 		try:
-			data1= requests.get(b[int(change_of_cinema_2)-1])
+			try:
+				data1= requests.get(b[int(change_of_cinema_2)-1])
+			except ValueError:
+				pass
 		except IndexError:
 			pass
 		b=[]
