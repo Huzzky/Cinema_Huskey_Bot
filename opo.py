@@ -167,6 +167,95 @@ def seans_cinema(message):
 				proverka=[]
 
 				
+				
+				
+				
+				
+				
+				
+				
+				
+
+a,b,c,d,e,f =[], [], [],[],[],[]
+count,index,ind,count2 = 0,0,0,0
+time_none = 4
+fa,fo ='',''
+
+@bot.message_handler(commands=['kino'])
+def first_step(message):
+	global count, fa, fo,count2,b,a,c
+	data1 = requests.get('https://msk.kinoafisha.info/cinema/')
+	data = data1.text 
+	bs = BeautifulSoup(data, 'html.parser')
+	elms = bs.select('a.theater_name.link.link-default')
+	for i in elms:
+		count+=1
+		if count<183:
+			b.append(i.attrs['href']) # Ссылки на кинотеатры
+	elms = bs.select('div.theater_right')
+	count=0
+	for i in elms:
+		count+=1
+		if count<183:
+			a.append(i.text.rstrip('\n').lstrip('\n')) # Список кинотеатров
+
+	for i in a:
+		if len(fa)<4000:
+			fa+=i +' - /'+str(count2) + '\n\n'
+			count2+=1
+		else:
+			fo+=i+' - /'+str(count2) + '\n\n'
+			count2+=1
+	a = []
+	bot.send_message(message.chat.id, fa)
+	msg = bot.send_message(message.chat.id, fo + '\n\nВыбери кинотеатр для просмотра расписания. ')
+	bot.register_next_step_handler(msg, second_step)
+	fa,fo = '',''
+
+def second_step(message):
+	global ind, b,c,d,f
+	change_of_cinema= message.text
+	change_of_cinema_2 = change_of_cinema.lstrip('/')
+	try:
+		data1= requests.get(b[int(change_of_cinema_2)-1])
+	except IndexError:
+		pass
+	b=[]
+	data = data1.text
+	bs = BeautifulSoup(data, 'html.parser')
+	elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
+	for i in elms:
+		c.append(i.text.split('\n'))
+	for i in c:
+		for j in i:
+			if j=='' or j=="Купить":
+				pass
+			elif j =='Точные дату и время уточняйте в кинотеатре':
+				break
+				bot.send_message(message.chat.id, 'Херня, вырубай')
+			else:
+				d.append(''.join(j)) # Расписание и цена
+	for i in d:
+		try:
+			f.append(d[ind]+', '+d[ind+2]+': '+d[ind+3]) # Расписание и цена
+			ind+=4
+		except IndexError:
+			pass
+	c,d=[],[]
+	elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
+	adres_of_cinema = []
+	for i in elms:
+		adres_of_cinema.append(i.text.rstrip('\n'))
+	elms = bs.select('div.theaterInfo_desc') # описание кинотеатра
+	desc_of_cinema = []
+	for i in elms:
+		desc_of_cinema.append(i.text)
+	bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
+	bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
+	bot.send_message(message.chat.id, 'Расписание: '+'\n\n'.join(f))
+	adres_of_cinema,desc_of_cinema,f=[],[],[]
+
+				
 
 
 bot.polling()
