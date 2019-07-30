@@ -218,7 +218,7 @@ def second_step(message):
 	if change_of_cinema=='Назад' or change_of_cinema=='назад' or change_of_cinema=='Выход' or change_of_cinema=='выход':
 		bot.send_message(message.chat.id, 'Ладно.')
 		ind, b,c,d,f = 0, [], [],[],[]
-	elif:
+	else:
 		change_of_cinema_2 = change_of_cinema.lstrip('/')
 		try:
 			data1= requests.get(b[int(change_of_cinema_2)-1])
