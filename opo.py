@@ -14,7 +14,7 @@ info_films_dop = ['Продолжительность фильма: ', 'Год �
 dop_full,dop_full2,dop_full3,dop_full4,dop_full5,href,info_films,proverka,name_cinema,name_metro,id_cinema,kino,description=[],[],[],[],[],[],[],[],[],[],[],[],[]
 pol,pol1,pol2,pol3,pol4,pol5,count,aj,index=0,0,0,0,0,0,0,0,0
 dict_cinema={}
-TOKEN = '767349424:AAGrdNyYLB1aS-U00QB5Xeto73RlpL1NcX0'
+TOKEN = '767349424:AAEVMUtfNPMWx8ePCA6wTiuqtWxuZxA3T2c'
 bot = telebot.TeleBot(TOKEN)
 
 
