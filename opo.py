@@ -230,10 +230,10 @@ def second_step(message):
 		b=[]
 		try:
 			data = data1.text
+			bs = BeautifulSoup(data, 'html.parser')
+			elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
 		except UnboundLocalError:
 			pass
-		bs = BeautifulSoup(data, 'html.parser')
-		elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
 		for i in elms:
 			c.append(i.text.split('\n'))
 		for i in c:
