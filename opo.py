@@ -177,7 +177,7 @@ def seans_cinema(message):
 				
 
 a,b,c,d,e,f =[], [], [],[],[],[]
-count,index,ind,count2 = 0,0,0,0
+count,index,ind,count2 = 0,0,0,1
 time_none = 4
 fa,fo ='',''
 
@@ -210,7 +210,7 @@ def first_step(message):
 	bot.send_message(message.chat.id, fa)
 	msg = bot.send_message(message.chat.id, fo + '\n\nВыбери кинотеатр для просмотра расписания. Или напиши "Назад" или "Выход"')
 	bot.register_next_step_handler(msg, second_step)
-	fa,fo,count2 = '','',0
+	fa,fo,count2 = '','',1
 
 def second_step(message):
 	global ind, b,c,d,f
