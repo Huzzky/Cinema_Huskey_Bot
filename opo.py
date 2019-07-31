@@ -210,7 +210,7 @@ def first_step(message):
 	bot.send_message(message.chat.id, fa)
 	msg = bot.send_message(message.chat.id, fo + '\n\nВыбери кинотеатр для просмотра расписания. Или напиши "Назад" или "Выход"')
 	bot.register_next_step_handler(msg, second_step)
-	fa,fo = '',''
+	fa,fo,count2 = '','',0
 
 def second_step(message):
 	global ind, b,c,d,f
