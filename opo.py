@@ -232,38 +232,38 @@ def second_step(message):
 			data = data1.text
 			bs = BeautifulSoup(data, 'html.parser')
 			elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
+			for i in elms:
+				c.append(i.text.split('\n'))
+			for i in c:
+				for j in i:
+					if j=='' or j=="Купить":
+						pass
+					elif j =='Точные дату и время уточняйте в кинотеатре':
+						break
+						bot.send_message(message.chat.id, 'Херня, вырубай')
+					else:
+						d.append(''.join(j)) # Расписание и цена
+			for i in d:
+				try:
+					f.append(d[ind]+', '+d[ind+2]+': '+d[ind+3]) # Расписание и цена
+					ind+=4
+				except IndexError:
+					pass
+			c,d=[],[]
+			elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
+			adres_of_cinema = []
+			for i in elms:
+				adres_of_cinema.append(i.text.rstrip('\n'))
+			elms = bs.select('div.theaterInfo_desc') # описание кинотеатра
+			desc_of_cinema = []
+			for i in elms:
+				desc_of_cinema.append(i.text)
+			bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
+			bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
+			bot.send_message(message.chat.id, 'Расписание: '+'\n\n'.join(f))
+			adres_of_cinema,desc_of_cinema,f=[],[],[]
 		except UnboundLocalError:
 			pass
-		for i in elms:
-			c.append(i.text.split('\n'))
-		for i in c:
-			for j in i:
-				if j=='' or j=="Купить":
-					pass
-				elif j =='Точные дату и время уточняйте в кинотеатре':
-					break
-					bot.send_message(message.chat.id, 'Херня, вырубай')
-				else:
-					d.append(''.join(j)) # Расписание и цена
-		for i in d:
-			try:
-				f.append(d[ind]+', '+d[ind+2]+': '+d[ind+3]) # Расписание и цена
-				ind+=4
-			except IndexError:
-				pass
-		c,d=[],[]
-		elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
-		adres_of_cinema = []
-		for i in elms:
-			adres_of_cinema.append(i.text.rstrip('\n'))
-		elms = bs.select('div.theaterInfo_desc') # описание кинотеатра
-		desc_of_cinema = []
-		for i in elms:
-			desc_of_cinema.append(i.text)
-		bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
-		bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
-		bot.send_message(message.chat.id, 'Расписание: '+'\n\n'.join(f))
-		adres_of_cinema,desc_of_cinema,f=[],[],[]
 
 				
 
