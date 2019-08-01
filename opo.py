@@ -215,52 +215,61 @@ def first_step(message):
 def second_step(message):
 	global ind, b,c,d,f
 	change_of_cinema= message.text
+	wordUp=set('!@#$%^&*(){}[]<>,.:;"№%-_+=')
 	if change_of_cinema=='Назад' or change_of_cinema=='назад' or change_of_cinema=='Выход' or change_of_cinema=='выход':
 		bot.send_message(message.chat.id, 'Ладно.')
 		ind, b,c,d,f = 0, [], [],[],[]
+	elif any(x for x in wordUp if x in change_of_cinema)==True:
+		bot.send_message(message.chat.id, "Ты ввел не то, что нужно")
 	else:
-		change_of_cinema_2 = change_of_cinema.lstrip('/')
-		try:
+		if change_of_cinema.lstrip('/')==' ' or change_of_cinema.lstrip('/') == '':
+			bot.send_message(message.chat.id, "Ты ввел только '/'")
+		else:
+			change_of_cinema_2 = change_of_cinema.lstrip('/')
 			try:
-				data1= requests.get(b[int(change_of_cinema_2)-1])
-			except ValueError:
-				pass
-		except IndexError:
-			pass
-		b=[]
-		data = data1.text
-		bs = BeautifulSoup(data, 'html.parser')
-		elms = bs.select('div.showtimes_item.fav.fav-film') # Расписание и цена
-		for i in elms:
-			c.append(i.text.split('\n'))
-		for i in c:
-			for j in i:
-				if j=='' or j=="Купить":
+				try:
+					data1= requests.get(b[int(change_of_cinema_2)-1])
+				except ValueError:
 					pass
-				elif j =='Точные дату и время уточняйте в кинотеатре':
-					break
-					bot.send_message(message.chat.id, 'Херня, вырубай')
-				else:
-					d.append(''.join(j)) # Расписание и цена
-		for i in d:
-			try:
-				f.append(d[ind]+', '+d[ind+2]+': '+d[ind+3]) # Расписание и цена
-				ind+=4
 			except IndexError:
 				pass
-		c,d=[],[]
-		elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
-		adres_of_cinema = []
-		for i in elms:
-			adres_of_cinema.append(i.text.rstrip('\n'))
-		elms = bs.select('div.theaterInfo_desc') # описание кинотеатра
-		desc_of_cinema = []
-		for i in elms:
-			desc_of_cinema.append(i.text)
-		bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
-		bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
-		bot.send_message(message.chat.id, 'Расписание: '+'\n\n'.join(f))
-		adres_of_cinema,desc_of_cinema,f=[],[],[]
+			b=[]
+			print(d)
+			data = data1.text
+			bs = BeautifulSoup(data, 'html.parser')
+			elms = bs.select('div.showtimes_item.fav.fav-film')
+			# Здесь
+			for i in elms:
+				c.append(i.text.split('\n'))
+			for i in c:
+				for j in i:
+					if j=='' or j=="Купить":
+						pass
+					else:
+						d.append(''.join(j)) # Расписание и цена
+			list_janre=['аниме','биографический','боевик','вестерн','военный','детектив','детский','документальный','драма','исторический','кинокомикс','комедия','концерт','короткометражный','криминал','мелодрама','мистика','музыка','мультфильм','мюзикл','научный','приключения','реалити-шоу','семейный','спорт','ток-шоу','триллер','ужасы','фантастика','фильм-нуар','фэнтези','эротика']
+
+			for i in enumerate(d):
+				for j in range(len(list_janre)):
+					if list_janre[j] in i[1]:
+						del d[i[0]]
+						break
+			for i in enumerate(d):
+				if '₽' in i[1]:
+					del d[i[0]]
+			c=[]
+			elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
+			adres_of_cinema = []
+			for i in elms:
+				adres_of_cinema.append(i.text.rstrip('\n'))
+			elms = bs.select('div.theaterInfo_desc') # описание кинотеатра
+			desc_of_cinema = []
+			for i in elms:
+				desc_of_cinema.append(i.text)
+			bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
+			bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
+			bot.send_message(message.chat.id, 'Расписание: '+'\n'.join(d))
+			adres_of_cinema,desc_of_cinema,d=[],[],[]
 
 
 				
