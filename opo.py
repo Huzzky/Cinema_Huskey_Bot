@@ -236,7 +236,6 @@ def second_step(message):
 			except IndexError:
 				pass
 			b=[]
-			print(d)
 			data = data1.text
 			bs = BeautifulSoup(data, 'html.parser')
 			elms = bs.select('div.showtimes_item.fav.fav-film')
@@ -271,7 +270,7 @@ def second_step(message):
 			bot.send_message(message.chat.id, 'Адрес: '+adres_of_cinema[0])
 			bot.send_message(message.chat.id, 'Описание: '+'\n'.join(desc_of_cinema))
 			bot.send_message(message.chat.id, 'Расписание: '+'\n'.join(d))
-			adres_of_cinema,desc_of_cinema,d=[],[],[]
+			adres_of_cinema,desc_of_cinema,d, data, change_of_cinema_2, change_of_cinema=[],[],[], "",0,0
 
 
 				
