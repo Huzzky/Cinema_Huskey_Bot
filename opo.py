@@ -185,10 +185,10 @@ fa,fo ='',''
 
 @bot.message_handler(commands=['kino'])
 def first_step(message):
+	global count, fa, fo,count2,b,a,c
 	a = []
 	fa,fo,count2 = '','',1
 	b,c=[],[]
-	global count, fa, fo,count2,b,a,c
 	data1 = requests.get('https://msk.kinoafisha.info/cinema/')
 	data = data1.text 
 	bs = BeautifulSoup(data, 'html.parser')
