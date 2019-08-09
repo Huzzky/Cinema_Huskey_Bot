@@ -185,6 +185,9 @@ fa,fo ='',''
 
 @bot.message_handler(commands=['kino'])
 def first_step(message):
+	a = []
+	fa,fo,count2 = '','',1
+	b,c=[],[]
 	global count, fa, fo,count2,b,a,c
 	data1 = requests.get('https://msk.kinoafisha.info/cinema/')
 	data = data1.text 
@@ -209,11 +212,9 @@ def first_step(message):
 		else:
 			fo+=i+' - /'+str(count2) + '\n\n'
 			count2+=1
-	a = []
 	bot.send_message(message.chat.id, fa)
 	msg = bot.send_message(message.chat.id, fo + '\n\nВыбери кинотеатр для просмотра расписания. Или напиши "Назад" или "Выход"')
 	bot.register_next_step_handler(msg, second_step)
-	fa,fo,count2 = '','',1
 
 def second_step(message):
 	global ind, b,c,d,f
@@ -236,7 +237,6 @@ def second_step(message):
 					pass
 			except IndexError:
 				pass
-			b=[]
 			data = data1.text
 			bs = BeautifulSoup(data, 'html.parser')
 			elms = bs.select('div.showtimes_item.fav.fav-film')
@@ -259,7 +259,6 @@ def second_step(message):
 			for i in enumerate(d):
 				if '₽' in i[1]:
 					del d[i[0]]
-			c=[]
 			elms = bs.select('a.theaterInfo_addr.link.link-default') # Адрес
 			adres_of_cinema = []
 			for i in elms:
