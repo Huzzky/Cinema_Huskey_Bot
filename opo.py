@@ -193,7 +193,8 @@ def first_step(message):
 	for i in elms:
 		count+=1
 		if count<183:
-			b.append(i.attrs['href']) # Ссылки на кинотеатры
+			b.append(i.attrs['href'])# Ссылки на кинотеатры
+	print(b)
 	elms = bs.select('div.theater_right')
 	count=0
 	for i in elms:
