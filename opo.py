@@ -1,12 +1,12 @@
 import telebot
+from telebot import types
 import random
 import requests
 import bs4
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 import re
-
-
+from telebot.types import ReplyKeyboardRemove,ReplyKeyboardMarkup, KeyboardButton,InlineKeyboardMarkup, InlineKeyboardButton
 
 
 
@@ -105,7 +105,10 @@ def OMl(message):
 				#print(description)
 				bot.send_message(message.chat.id, '\n\n'.join(description))
 				description, info_films = [], []
-				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то напиши 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.")
+				button_hi = KeyboardButton('Список кинотеатров')
+				greet_kb = ReplyKeyboardMarkup()
+				greet_kb.add(button_hi)
+				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то нажми на кнопку 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.", reply_markup=greet_kb)
 				bot.register_next_step_handler(msg, seans_cinema)
 			except IndexError:
 				bot.send_message(message.chat.id, "Такого номера фильма нет, увы. Начни все заново - /films")
