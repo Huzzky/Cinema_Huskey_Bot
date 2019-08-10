@@ -219,7 +219,7 @@ def first_step(message):
 def second_step(message):
 	global ind, b,c,d,f
 	change_of_cinema= message.text
-	wordUp=set('!@#$%^&*(){}[]<>,.:;"№%-_+=')
+	wordUp=set('!@#$%^&*(){}[]<>,.:;"№%-_+=qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMйцукенгшщзхъёфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪЁФЫВАПРОЛДЖЭЯЧСМИТЬБЮ')
 	if change_of_cinema=='Назад' or change_of_cinema=='назад' or change_of_cinema=='Выход' or change_of_cinema=='выход':
 		bot.send_message(message.chat.id, 'Ладно.')
 		ind, b,c,d,f = 0, [], [],[],[]
