@@ -117,7 +117,7 @@ def OMl(message):
 
 def seans_cinema(message):
 	global dict_cinema,proverka,dop_full4
-	reply_markup=kb.ReplyKeyboardRemove())
+	reply_markup=greet_kb.ReplyKeyboardRemove())
 	number_of_cinema=href_films[int(change_films_2)-1][35:]
 	data1=requests.get('https://msk.kinoafisha.info/movies/'+str(number_of_cinema)+'#subMenuScrollTo') #парсинг описания и сеансов фильма
 	data = data1.text
