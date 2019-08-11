@@ -16,7 +16,7 @@ pol,pol1,pol2,pol3,pol4,pol5,count,aj,index=0,0,0,0,0,0,0,0,0
 dict_cinema={}
 TOKEN = '767349424:AAEVMUtfNPMWx8ePCA6wTiuqtWxuZxA3T2c'
 bot = telebot.TeleBot(TOKEN)
-
+greet_kb = ''
 
 @bot.message_handler(commands=['help'])
 def help(message):
@@ -77,7 +77,7 @@ def handle_films(message):
 def OMl(message):
 	global change_films, change_films_2
 	global description
-	global info_films
+	global info_films, greet_kb
 	change_films= message.text
 	change_films_2 = change_films.lstrip('/')
 	if change_films.lower == "выход" or change_films=='-':
@@ -110,14 +110,13 @@ def OMl(message):
 				greet_kb.add(button_hi)
 				msg = bot.send_message(message.chat.id, "Ты можешь выбрать 'Выход' или написать название кинотетра. Например: 'ТРЦ «Миля»'. \n\nЕсли не знаешь какие есть кинотетры, то нажми на кнопку 'Список кинотеатров'.\nЕсли что-то не получается, то обратись к команде /help. \nВыбирай.", reply_markup=greet_kb)
 				bot.register_next_step_handler(msg, seans_cinema)
-				reply_markup=greet_kb.ReplyKeyboardRemove()
 			except IndexError:
-				bot.send_message(message.chat.id, "Такого номера фильма нет, увы. Начни все заново - /films")
+				bot.send_message(message.chat.id, "Такого номера фильма нет, увы. Начни все заново - /films", reply_markup=greet_kb.ReplyKeyboardRemove())
 		except ValueError:
-			bot.send_message(message.chat.id, "Ты ввел не номер фильма. Начни все заново - /films")
+			bot.send_message(message.chat.id, "Ты ввел не номер фильма. Начни все заново - /films", reply_markup=greet_kb.ReplyKeyboardRemove())
 
 def seans_cinema(message):
-	global dict_cinema,proverka,dop_full4
+	global dict_cinema,proverka,dop_full4,greet_kb
 	number_of_cinema=href_films[int(change_films_2)-1][35:]
 	data1=requests.get('https://msk.kinoafisha.info/movies/'+str(number_of_cinema)+'#subMenuScrollTo') #парсинг описания и сеансов фильма
 	data = data1.text
@@ -128,12 +127,11 @@ def seans_cinema(message):
 	bs = BeautifulSoup(data, "html.parser")
 	change_second = message.text
 	if change_second=='Выход':
-		bot.send_message(message.chat.id, "Ладно.")
+		bot.send_message(message.chat.id, "Ладно.", reply_markup=greet_kb.ReplyKeyboardRemove())
 	elif change_second=='Выход':
 		pass
 	elif change_second=="Список кинотеатров":
-		print(proverka)
-		bot.send_message(message.chat.id, "Тебе выведет названия кинотетров, где есть сеансы этого фильма.")
+		bot.send_message(message.chat.id, "Тебе выведет названия кинотетров, где есть сеансы этого фильма.", reply_markup=greet_kb.ReplyKeyboardRemove())
 		bot.send_message(message.chat.id, '\n'.join(proverka))
 		proverka=[]
 		bot.send_message(message.chat.id, "Введи еще раз /films и введи уже нужный кинотетр.")
