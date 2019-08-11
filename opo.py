@@ -127,7 +127,7 @@ def seans_cinema(message):
 	bs = BeautifulSoup(data, "html.parser")
 	change_second = message.text
 	if change_second=='Выход':
-		bot.send_message(message.chat.id, "Ладно.", reply_markup=greet_kb.ReplyKeyboardRemove())
+		bot.send_message(message.chat.id, "Ладно.")
 	elif change_second=='Выход':
 		pass
 	elif change_second=="Список кинотеатров":
